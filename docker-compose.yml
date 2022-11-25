@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    build: ./reverse-proxy
+    ports:
+      - "80:80"
+      - "2375:2375"
