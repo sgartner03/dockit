@@ -13,7 +13,7 @@ headerT _ =
     header [] [
         div [class "d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom"] [
             a [href "/", class "d-flex align-items-center text-dark text-decoration-none"] [
-                img [class "ml-5", src "/assets/brand/bootstrap-logo.png", width 60, height 50] []
+                img [class "ml-5", src "/assets/brand/logo.png", width 60, height 50] []
                 , span [class "fs-4 mr-3"] [text "Dockit (beta)"]
                 ]
             , nav [class "d-inline-flex mt-2 mt-md-0 ms-md-auto"] [
