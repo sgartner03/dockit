@@ -38,14 +38,18 @@ realName : String -> String
 realName x =
     if (String.endsWith ".md" x) then (String.dropRight 3 x) else x
 
-init : String -> (Model, Cmd Msg)
-init x =
-  ( Model x Loading Loading
-  , Cmd.batch [
+fetchContent : String -> Cmd Msg
+fetchContent x =
       Http.get
         { url = (String.append "/assets/docs/" (realFile x))
         , expect = Http.expectString GotText
         }
+
+init : String -> (Model, Cmd Msg)
+init x =
+  ( Model x Loading Loading
+  , Cmd.batch [
+      fetchContent x
       , Http.get
         { url = "/assets/docs/index.json"
         , expect = Http.expectJson GotIndex (Json.Decode.list indexDecoder)
@@ -111,10 +115,7 @@ update msg model =
             ( { model | index = (Failure) }, Cmd.none )
     ChangeText fileName ->
       ( { model | content = Loading, name = fileName }
-      , Http.get
-        { url = (String.append "/assets/docs/" (realFile fileName))
-        , expect = Http.expectString GotText
-        }
+      , fetchContent fileName
       )
 
 view : Model -> Browser.Document Msg
