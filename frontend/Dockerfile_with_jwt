@@ -18,7 +18,7 @@ RUN set -x \
  && make install
 
 # copying config and static files
-COPY nginx_from_scratch.conf /etc/nginx/nginx.conf
+COPY nginx_with_jwt.conf /etc/nginx/nginx.conf
 COPY index.html /usr/local/nginx/html
 COPY assets/ /usr/local/nginx/html/assets
 
