@@ -95,7 +95,11 @@ initCurrentPage ( model, existingCmds ) =
                 DocsRoute route ->
                     let
                         (pageModel, pageCmd) =
-                            Docs.init route
+                            case model.page of
+                                DocsPage docsModel ->
+                                    Docs.update (Docs.ChangeText route) docsModel
+                                _ ->
+                                    Docs.init route
                     in
                     ( DocsPage pageModel, Cmd.map DocMsg pageCmd )
     in
