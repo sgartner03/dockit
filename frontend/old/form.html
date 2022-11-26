@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="de-at">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Paul Schadauer">
+    <title>Docker Server erstellen</title>
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container py-3">
+  <header>
+    <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+        <img src="assets/brand/bootstrap-logo.png" alt="" width="60" height="50" class="ml-5">
+        <span class="fs-4 mr-3">Dockit (beta)</span>
+      </a>
+
+      <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+        <a class="me-3 py-2 text-dark text-decoration-none" href="docker.html">Docker</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" href="#">Datenbank</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" href="#">Dokumentation</a>
+        <a class="py-2 text-dark text-decoration-none" href="signin.html"><button type="button" class="btn btn-sm btn-outline-danger">Abmelden</button></a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="py-3">
+      <h2>Neuen Docker Server erstellen</h2>
+      <p class="lead"></p>
+    </div>
+
+    <h4 class="mb-3">Server Konfiguration</h4>
+    <form>
+      <div class="row g-3" />
+      <div class="col-12">
+        <label for="username" class="form-label">Servername</label>
+        <div class="input-group">
+          <span class="input-group-text">@</span>
+          <input type="text" class="form-control" id="server_name" placeholder="Servername" required>
+        </div>
+      </div>
+
+      <p>Mit diesen Servername kannst du dann deinen Webservice erreichen. Zum Beispiel: würde dein Servername "proj2223-diplomprojekt1" sein, dann ist er über <a href="">https://projekte.tgm.ac.at/http/proj2223-diplomprojekt1</a> erreichbar.
+      Falls dieser Server für dein Diplomprojekt ist, soll der Servername so aussehen: <b>proj2223-(dein Projektname).</b></p>
+
+      <hr class="my-4">
+
+      <h4 class="mb-3">Organisatorisches</h4>
+
+      <div class="col-12">
+        <label for="email" class="form-label">Email der für den Server verantwortlichen Person<span class="text-muted"> (wenn ungleich Email deines Benutzerkontos)</span></label>
+        <input type="email" class="form-control" id="email" placeholder="mmusterman@student.tgm.ac.at">
+      </div>
+
+      <div class="col-12">
+        <label for="description" class="form-label">Beschreibung der Nutzung des Servers</span></label>
+        <textarea class="form-control" aria-label="With textarea"></textarea>
+      </div>
+
+      <hr class="my-4">
+
+      <div>
+        <input type="checkbox" class="form-check-input" id="same-address">
+        <label class="form-check-label">Ich stimme den <a href="https://projekte.tgm.ac.at/">Regeln im Umgang mit dem Projektserver</a> zu.</label>
+      </div>
+
+      <hr class="my-4">
+
+      <div class="text-center">
+          <button class="w-50 btn btn-primary btn-lg" type="submit">Server erstellen</button>
+      </div>
+    </form>
+  </main>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+  </footer>
+</div>
+
+
+    <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+    <!--<script src="form-validation.js"></script>-->
+  </body>
+</html>
