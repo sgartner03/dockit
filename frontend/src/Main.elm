@@ -34,20 +34,20 @@ routeParser =
     ]
 
 type Msg
-  = DocMsg Docs.Msg
+  = DocsMsg Docs.Msg
   | LinkClicked Browser.UrlRequest
   | UrlChanged Url.Url
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case ( msg, model.page ) of
-        ( DocMsg subMsg, DocsPage pageModel ) ->
+        ( DocsMsg subMsg, DocsPage pageModel ) ->
             let
                 ( updatedPageModel, updatedCmd ) =
                     Docs.update subMsg pageModel
             in
             ( { model | page = DocsPage updatedPageModel }
-            , Cmd.map DocMsg updatedCmd
+            , Cmd.map DocsMsg updatedCmd
             )
         ( LinkClicked urlRequest, _ ) ->
           case urlRequest of
@@ -78,7 +78,7 @@ view model =
             let
                 dview = Docs.view docsModel
                 obody = dview.body
-                nbody = List.map (\html -> Html.map DocMsg html) obody
+                nbody = List.map (\html -> Html.map DocsMsg html) obody
             in
                 { title = dview.title
                 , body = [div [class "container py-3"] nbody]
@@ -101,7 +101,7 @@ initCurrentPage ( model, existingCmds ) =
                                 _ ->
                                     Docs.init route
                     in
-                    ( DocsPage pageModel, Cmd.map DocMsg pageCmd )
+                    ( DocsPage pageModel, Cmd.map DocsMsg pageCmd )
     in
     ( { model | page = currentPage }
     , Cmd.batch [ existingCmds, mappedPageCmds ]
