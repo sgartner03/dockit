@@ -15,7 +15,12 @@ RUN set -x \
  && ./configure --add-module=../ngx-http-auth-jwt-module --with-http_ssl_module \
     # building
  && make \
- && make install
+ && make install \
+    # space optimisations
+    # uninstalling tools and dev packages
+ && apt-get purge -y libjansson-dev libjwt-dev wget unzip gcc make libpcre3-dev libcurl4-openssl-dev libssl-dev zlib1g-dev \
+    # clearing package cache
+ && apt-get clean -y
 
 # copying config and static files
 COPY nginx_with_jwt.conf /etc/nginx/nginx.conf
