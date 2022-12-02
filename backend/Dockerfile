@@ -7,6 +7,7 @@ WORKDIR /app
 
 
 RUN apt-get update && \
+    apt-get install -y build-essential libsasl2-dev python-dev libldap2-dev libssl-dev && \
     apt-get install -y --no-install-recommends netcat && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
