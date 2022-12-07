@@ -34,42 +34,16 @@ class Users(TypedTable):
     id: int
     username: str
 
-
-class Articles(TypedTable):
-    __table__ = "articles"
+class Containers(TypedTable):
+    __table__ = "containers"
 
     id: int
-    slug: str
-    title: str
+    name: str
+    container_id: str
     description: str
-    body: str
-    author_id: int
     created_at: datetime
-    updated_at: datetime
-
-
-class Tags(TypedTable):
-    __table__ = "tags"
-
-    tag: str
-
-
-class ArticlesToTags(TypedTable):
-    __table__ = "articles_to_tags"
-
-    article_id: int
-    tag: str
-
-
-class Favorites(TypedTable):
-    __table__ = "favorites"
-
-    article_id: int
-    user_id: int
+    student: str
 
 
 users = Users()
-articles = Articles()
-tags = Tags()
-articles_to_tags = ArticlesToTags()
-favorites = Favorites()
+container = Containers()
