@@ -1,0 +1,37 @@
+FROM debian:bullseye
+# dependencies for nginx and modules and for downloading the source code
+RUN set -x \
+ && apt-get update && apt-get upgrade -y \
+ && apt-get install -y libjansson4 libjansson-dev libjwt0 libjwt-dev wget unzip gcc make libpcre3 libpcre3-dev libcurl4-openssl-dev libssl-dev zlib1g-dev \
+    # jwt nginx module
+ && wget https://github.com/TeslaGov/ngx-http-auth-jwt-module/archive/refs/heads/master.zip \
+ && unzip master.zip \
+ && mv ngx-http-auth-jwt-module-master/ ngx-http-auth-jwt-module/ \
+    # nginx source code
+ && wget https://nginx.org/download/nginx-1.22.1.tar.gz \
+ && tar -xvf nginx-*.tar.gz \
+ && cd nginx-*/ \
+    # build options
+ && ./configure --add-module=../ngx-http-auth-jwt-module --with-http_ssl_module \
+    # building
+ && make \
+ && make install \
+    # space optimisations
+    # clearing build cache
+ && make clean \
+    # uninstalling tools and dev packages
+ && apt-get purge -y libjansson-dev libjwt-dev wget unzip gcc make libpcre3-dev libcurl4-openssl-dev libssl-dev zlib1g-dev \
+    # clearing package cache
+ && apt-get clean -y
+
+# copying config and static files
+COPY nginx_with_jwt.conf /etc/nginx/nginx.conf
+COPY index.html /usr/local/nginx/html
+COPY assets/ /usr/local/nginx/html/assets
+
+EXPOSE 80
+
+STOPSIGNAL SIGQUIT
+
+# running
+CMD ["/usr/local/nginx/sbin/nginx", "-g", "daemon off;"]
